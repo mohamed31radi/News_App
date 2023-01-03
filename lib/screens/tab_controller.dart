@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/models/NewsDataModel.dart';
+import 'package:news_app/providers/change_body_provider.dart';
 import 'package:news_app/providers/selceted_item_provider.dart';
+import 'package:news_app/screens/news_details_screen.dart';
 import 'package:news_app/screens/tab_item.dart';
 import 'package:news_app/shared/network/remote/api_manger.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +12,7 @@ import 'news_card.dart';
 
 class TabControllerScreen extends StatelessWidget {
   List<Sources> sources;
+  late int currentIndex;
   static String? value = '';
 
   TabControllerScreen(this.sources);
@@ -22,7 +25,7 @@ class TabControllerScreen extends StatelessWidget {
         var provider = Provider.of<SelectedItemProvider>(context);
         return Column(
           children: [
-            value == ''
+            ChangeBodyScreen.parameter == false
                 ? DefaultTabController(
                     length: sources.length,
                     child: TabBar(
@@ -41,7 +44,7 @@ class TabControllerScreen extends StatelessWidget {
                             .toList()))
                 : Text(''),
             FutureBuilder<NewsDataModel>(
-              future: value == ''
+              future: ChangeBodyScreen.parameter == false
                   ? ApiManger.getNewsData(
                       sourceId: sources[provider.selectedIndex].id!)
                   : ApiManger.getNewsData(query: value),
@@ -75,6 +78,7 @@ class TabControllerScreen extends StatelessWidget {
                   child: ListView.builder(
                     itemCount: news.length,
                     itemBuilder: (context, index) {
+                      currentIndex = index;
                       return NewsCard(news[index]);
                     },
                   ),

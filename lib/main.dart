@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/layout/home_layout.dart';
 import 'package:news_app/providers/change_language_provider.dart';
+import 'package:news_app/screens/news_details_screen.dart';
 import 'package:news_app/screens/setting_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
           routes: {
             HomeLayout.routeName: (context) => HomeLayout(),
             SettingScreen.routeName: (context) => SettingScreen(),
+            NewsDetailsScreen.routeName: (context) => NewsDetailsScreen(),
           },
           localizationsDelegates: [
             AppLocalizations.delegate,

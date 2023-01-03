@@ -19,6 +19,7 @@ class HomeLayout extends StatelessWidget {
       create: (context) => ChangeBodyScreen(),
       builder: (context, child) {
         var provider = Provider.of<ChangeBodyScreen>(context);
+        String searchValue;
         return Container(
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -61,13 +62,16 @@ class HomeLayout extends StatelessWidget {
                       color: Colors.blue,
                       size: 25,
                     ),
+                    onPressButton: (isOpen) {
+                      ChangeBodyScreen.parameter = false;
+                    },
                     textEditingController: TextEditingController(),
                     isOriginalAnimation: false,
                     buttonBorderColour: Colors.transparent,
                     buttonElevation: 0,
-                    onFieldSubmitted: (String value) {
-                      debugPrint('onFieldSubmitted value $value');
+                    onChanged: (value) {
                       TabControllerScreen.value = value;
+                      ChangeBodyScreen.parameter = true;
                       HomeScreen(provider.categoryModel!);
                     },
                   ),
