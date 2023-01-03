@@ -6,7 +6,6 @@ class NewsCard extends StatelessWidget {
   Articles article;
 
   NewsCard(this.article);
-
   @override
   Widget build(BuildContext context) {
     return Container(

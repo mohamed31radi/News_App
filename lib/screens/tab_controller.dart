@@ -10,6 +10,7 @@ import 'news_card.dart';
 
 class TabControllerScreen extends StatelessWidget {
   List<Sources> sources;
+  static String? value = '';
 
   TabControllerScreen(this.sources);
 
@@ -21,25 +22,29 @@ class TabControllerScreen extends StatelessWidget {
         var provider = Provider.of<SelectedItemProvider>(context);
         return Column(
           children: [
-            DefaultTabController(
-                length: sources.length,
-                child: TabBar(
-                    onTap: (value) {
-                      provider.SelectedIndex(value);
-                    },
-                    isScrollable: true,
-                    indicatorColor: Colors.transparent,
-                    tabs: sources
-                        .map((source) => Tab(
-                              child: TabItem(
-                                  source,
-                                  sources.indexOf(source) ==
-                                      provider.selectedIndex),
-                            ))
-                        .toList())),
+            value == ''
+                ? DefaultTabController(
+                    length: sources.length,
+                    child: TabBar(
+                        onTap: (value) {
+                          provider.SelectedIndex(value);
+                        },
+                        isScrollable: true,
+                        indicatorColor: Colors.transparent,
+                        tabs: sources
+                            .map((source) => Tab(
+                                  child: TabItem(
+                                      source,
+                                      sources.indexOf(source) ==
+                                          provider.selectedIndex),
+                                ))
+                            .toList()))
+                : Text(''),
             FutureBuilder<NewsDataModel>(
-              future:
-                  ApiManger.getNewsData(sources[provider.selectedIndex].id!),
+              future: value == ''
+                  ? ApiManger.getNewsData(
+                      sourceId: sources[provider.selectedIndex].id!)
+                  : ApiManger.getNewsData(query: value),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(
