@@ -1,0 +1,15 @@
+{
+    "news"            : "الاخبار",
+    "sports"          : "رياضة",
+    "politics"        : "سياسة",
+    "business"        : "أعمال",
+    "health"          : "صحة",
+    "science"         : "علوم",
+    "environment"     : "بيئة",
+    "categories"      : "الفئات",
+    "settings"        : "الأعدادات",
+    "language"        : "اللغة",
+    "news_app"        : "الأخبار",
+    "pick_category"   : "أختر الفئة المناسبة لك",
+    "select_language" : "حدد اللغة"
+}
