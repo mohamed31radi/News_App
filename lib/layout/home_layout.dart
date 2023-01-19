@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/providers/change_body_provider.dart';
+import 'package:news_app/providers/change_language_provider.dart';
 import 'package:news_app/screens/categories_screen.dart';
 import 'package:news_app/screens/drawer_screen.dart';
 import 'package:news_app/screens/home_screen.dart';
@@ -19,6 +20,7 @@ class HomeLayout extends StatelessWidget {
       create: (context) => ChangeBodyScreen(),
       builder: (context, child) {
         var provider = Provider.of<ChangeBodyScreen>(context);
+        var langProvider = Provider.of<LanguageProvider>(context);
         String searchValue;
         return Container(
           decoration: BoxDecoration(
@@ -40,7 +42,9 @@ class HomeLayout extends StatelessWidget {
               title: Text(AppLocalizations.of(context)!.news),
               actions: [
                 Container(
-                  margin: EdgeInsets.only(right: 10),
+                  margin: langProvider.language == 'en'
+                      ? EdgeInsets.only(right: 10)
+                      : EdgeInsets.only(left: 10),
                   child: SearchBarAnimation(
                     enableBoxShadow: false,
                     enableButtonShadow: false,
